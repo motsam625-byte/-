@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> تصميم السيرات الذاتية </title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <style>
+    
+    /* إعداد المتغيرات الأساسية للألوان (الأزرق النيون والبنفسجي) */
+:root {
+    --dark-space: #050505;        /* لون الخلفية الداكن */
+    --neon-blue: #00f2ff;         /* لون النيون الأزرق */
+    --neon-purple: #bc13fe;       /* لون النيون البنفسجي */
+    --glass-bg: rgba(255, 255, 255, 0.03); /* تأثير الزجاج المضبب */
+    --text-silver: #e0e0e0;       /* لون النص الفضي */
+    --transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* تأثير الحركة */
+}
+
+/* تنسيق جسم الصفحة والخلفية الإشعاعية */
+body {
+    font-family: 'Tajawal', sans-serif;
+    margin: 0;
+    background: var(--dark-space);
+    background-image: radial-gradient(circle at 50% 50%, #111 0%, #000 100%);
+    color: var(--text-silver);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* تنسيق قائمة التنقل العلوية (Nav) */
+nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(15px);
+    padding: 10px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    display: flex;
+    gap: 15px;
+}
+
+/* تنسيق أزرار القائمة */
+nav a {
+    color: #888;
+    text-decoration: none;
+    padding: 6px 13px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* شكل الزر النشط (المختار حالياً) */
+nav a.active {
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+    color: #fff;
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+/* حاوية الصفحات وتأثيرات الانتقال */
+.page-wrapper { flex: 1; position: relative; }
+
+.page {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.9);
+    transition: var(--transition);
+}
+
+/* الصفحة النشطة التي تظهر للمستخدم */
+.page.active { opacity: 1; visibility: visible; transform: scale(1); }
+
+/* تنسيق البطاقة الرئيسية (Card) */
+.main-card {
+    background: var(--glass-bg);
+    padding: 40px;
+    border-radius: 30px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+}
+
+/* صورة الملف الشخصي مع توهج نيون */
+.profile-pic {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 3px solid var(--neon-blue);
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+/* العناوين وتأثير الظل الضوئي */
+h1 { font-size: 2rem; color: #fff; text-shadow: 0 0 10px var(--neon-blue); }
+.it-title { color: var(--neon-purple); font-weight: bold; }
+
+/* أشرطة المهارات (Progress Bars) */
+.skill-bar-wrapper { text-align: right; margin-top: 20px; }
+.skill-name { font-size: 0.9rem; color: var(--neon-blue); }
+.bar-outer { height: 5px; background: #222; border-radius: 10px; margin: 8px 0 15px; }
+.bar-inner { height: 100%; background: var(--neon-blue); width: 0; border-radius: 10px; box-shadow: 0 0 10px var(--neon-blue); transition: 1s ease-in-out; }
+
+/* تنسيق حقول الإدخال في صفحة تواصل */
+input, textarea {
+    width: 100%;
+    padding: 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #333;
+    border-radius: 12px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+/* أزرار التواصل (واتساب وجيميل) */
+.btn-box { display: flex; gap: 15px; }
+.btn {
+    flex: 1;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    color: white;
+}
+.whatsapp-btn { background: #25d366; } /* أخضر واتساب */
+.gmail-btn { background: #ea4335; }    /* أحمر جيميل */
+</style>
+
+</head>
+
+<body>
+
+    <nav>
+        <a onclick="switchPage('home')" id="nav-home" class="active">أنا</a>
+        <a onclick="switchPage('skills')" id="nav-skills">خبراتي</a>
+        <a onclick="switchPage('edu')" id="nav-edu">دراستي</a>
+        <a onclick="switchPage('contact')" id="nav-contact">تواصل</a>
+    </nav>
+
+    <div class="page-wrapper">
+        
+        <section id="home" class="page active">
+            <div class="main-card">
+                <img src="Motsam.jpg" alt="معتصم" class="profile-pic">
+                <h1>معتصم علي حسن</h1>
+                <div class="it-title">هندسة تقنية المعلومات (IT Generalist)</div>
+                <p>📍 اليمن - الضالع</p>
+            </div>
+        </section>
+
+        <section id="skills" class="page">
+            <div class="main-card">
+                <h2 style="color: var(--neon-blue);">الخبرات والمهارات التقنية</h2>
+                <div class="skill-bar-wrapper">
+                    <div class="skill-name">الأمن السيبراني (Cybersecurity)</div>
+                    <div class="bar-outer"><div class="bar-inner" data-w="90%"></div></div>
+                    
+                    <div class="skill-name">تصميم وتطوير مواقع الويب (Full-Stack)</div>
+                    <div class="bar-outer"><div class="bar-inner" data-w="95%"></div></div>
+                    
+                    <div class="skill-name">برمجة التطبيقات (Dart, Python, C#)</div>
+                    <div class="bar-outer"><div class="bar-inner" data-w="85%"></div></div>
+                    
+                    <div class="skill-name">إدارة الشبكات وصيانة الأنظمة</div>
+                    <div class="bar-outer"><div class="bar-inner" data-w="80%"></div></div>
+             <div class="skill-name">
+أنشاء قواعد البيانات
+ </div>
+ <div class="bar-outer"><div class="bar-inner" data-w="75%"></div></div>
+ 
+<div class="skill-name">
+الذكاء الاصطناعي ( AI )
+ </div>
+ <div class="bar-outer"><div class="bar-inner" data-w="85%"></div></div>
+ 
+ <div class="skill-name">
+كل ما يخص Termux
+ </div>
+ 
+ <div class="bar-outer"><div class="bar-inner" data-w="95%"></div></div>
+ 
+ <div class="skill-name">
+تصميم قوالب وشعارات الشركات 
+ </div>
+ 
+ <div class="bar-outer"><div class="bar-inner" data-w="85%"></div></div>
+ 
+   <div class="skill-name">
+تصميم السيرات الذاتية
+ </div>
+
+ <div class="bar-outer"><div class="bar-inner" data-w="100%"></div></div>
+  </div>
+            </div>
+        </section>
+
+        <section id="edu" class="page">
+            <div class="main-card">
+                <h2 style="color: var(--neon-purple);">المسار التعليمي</h2>
+                <div style="border-right: 3px solid var(--neon-purple); padding-right: 20px; text-align: right;">
+                    <h3>كلية المجتمع</h3>
+                    <p><strong>التخصص:</strong> هندسة تقنية المعلومات (IT) - القسم العام</p>
+                    <p>دراسة شاملة تغطي كافة تخصصات التكنولوجيا.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="page">
+            <div class="main-card">
+                <h2>تواصل معي الآن</h2>
+                <input type="text" id="senderName" placeholder="اسمك الكريم">
+                <textarea id="senderMsg" rows="3" placeholder="اكتب رسالتك هنا..."></textarea>
+                
+                <div class="btn-box">
+                    <button onclick="openWA()" class="btn whatsapp-btn"> واتساب </button>
+                    "
+                    <button onclick="openGM()" class="btn gmail-btn">Gmail</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+    <script>
+    /**
+ * وظيفة التنقل بين الصفحات
+ * @param {string} pageId - معرف الصفحة المراد إظهارها
+ */
+function switchPage(pageId) {
+    // إخفاء جميع الصفحات
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // إظهار الصفحة المطلوبة
+    document.getElementById(pageId).classList.add('active');
+    
+    // تحديث حالة الأزرار في القائمة العلوية
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById('nav-' + pageId).classList.add('active');
+    
+    // تشغيل أنيميشن أشرطة المهارات عند الدخول لصفحة الخبرات
+    if(pageId === 'skills') {
+        setTimeout(() => { 
+            document.querySelectorAll('.bar-inner').forEach(b => b.style.width = b.getAttribute('data-w')); 
+        }, 300);
+    } else {
+        // إعادة الأشرطة للصفر عند الخروج من الصفحة
+        document.querySelectorAll('.bar-inner').forEach(b => b.style.width = '0');
+    }
+}
+
+/**
+ * وظيفة فتح تطبيق واتساب مباشرة
+ */
+function openWA() {
+    const name = document.getElementById('senderName').value.trim();
+    const msg = document.getElementById('senderMsg').value.trim();
+    
+    if(!name || !msg) { 
+        alert("يرجى تعبئة الاسم والرسالة أولاً"); 
+        return; 
+    }
+    
+    const phone = "967779749412";
+    const text = encodeURIComponent(`الاسم: ${name}\nالرسالة: ${msg}`);
+    
+    // محاولة فتح التطبيق مباشرة باستخدام البروتوكول الخاص
+    window.location.href = `whatsapp://send?phone=${phone}&text=${text}`;
+    
+    // خطة بديلة (Fallback) في حال لم يتم التعرف على البروتوكول
+    setTimeout(() => {
+        window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    }, 1000);
+}
+
+/**
+ * وظيفة إرسال إيميل عبر تطبيق الجيميل
+ */
+function openGM() {
+    const name = document.getElementById('senderName').value.trim();
+    const msg = document.getElementById('senderMsg').value.trim();
+    if(!name || !msg) { alert("يرجى تعبئة الحقول"); return; }
+    
+    const email = "motsam625@gmail.com";
+    const subject = encodeURIComponent("تواصل مهني من معرض الأعمال");
+    const body = encodeURIComponent(`الاسم: ${name}\nالرسالة: ${msg}`);
+    
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+}
+</script>
+</body>
+</html>
